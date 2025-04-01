@@ -3,6 +3,7 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import TaskIcon from '@mui/icons-material/Task';
+import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Avatar, IconButton } from '@mui/material';
@@ -14,10 +15,11 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [selectedItem, setSelectedItem] = useState('/');
   const currentWidth = isExpanded ? drawerWidth : 80;
 
   const menuItems = [
-    // { text: 'Home', icon: <HomeIcon />, path: '/' },
+    { text: 'Home', icon: <HomeIcon />, path: '/' },
     { text: 'Tasks', icon: <TaskIcon />, path: '/tasks' },
     // { text: 'Categories', icon: <CategoryIcon />, path: '/categories' },
   ];
@@ -28,16 +30,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
       sx={{
         width: currentWidth,
         flexShrink: 0,
+        border: '1px solid #3f3f46',
         '& .MuiDrawer-paper': {
           width: currentWidth,
-          boxSizing: 'border-box',
-          backgroundColor: '#f5f5f5',
-          color: 'white',
-          transition: 'width 0.2s',
-          display: 'flex',
-          flexDirection: 'column',
-          fontFamily: 'Roboto, sans-serif',
-          overflowX: 'hidden',
         },
       }}
     >
@@ -48,49 +43,52 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
         flexDirection: 'column',
         pt: '12px',
         position: 'relative',
+        borderBottom: '1px solid #3f3f46',
       }}>
         <Box sx={{
           width: '100%',
           display: 'flex',
-          justifyContent: isExpanded ? 'flex-end' : 'center',
-          pr: isExpanded ? 2 : 0
+          justifyContent: isExpanded ? 'space-between' : 'center',
+          pr: isExpanded ? 2 : 0,
+          pb: '20px'
         }}>
+          {isExpanded && <Box sx={{
+            mt: 2,
+            color: '#d4af37',
+            fontSize: '24px',
+            fontFamily: 'century-gothic',
+            fontWeight: 500,
+            pl: '32px'
+          }}>
+            House of Tasks
+          </Box>}
+
           <IconButton
             onClick={() => setIsExpanded(!isExpanded)}
             sx={{
-              color: '#2d2d2d',
+              color: '#d4af37',
+              pt: '16px',
+              pb: '16px',
             }}
           >
             <MenuIcon />
           </IconButton>
         </Box>
-
-        <Avatar
-          sx={{
-            width: isExpanded ? 102 : 48,
-            height: isExpanded ? 102 : 48,
-            backgroundColor: 'rgba(0, 0, 0, 0.08)',
-            color: '#2d2d2d',
-            transition: 'all 0.2s',
-            mt: '16px',
-          }}
-        >
-          <PersonIcon sx={{ fontSize: isExpanded ? 24 : 20 }} />
-        </Avatar>
-        {isExpanded && (
-          <Box sx={{
-            mt: 2,
-            color: '#2d2d2d',
-            fontSize: '16px',
-            fontWeight: 500,
-            pb: '12px'
-          }}>
-            Daenerys Targeryen
-          </Box>
-        )}
       </Box>
 
-      <Box sx={{ 
+      <Box sx={{
+        pl: isExpanded ? '24px' : '20px',
+        pt: '24px',
+        pb: '8px',
+        color: '#d4af37',
+        fontSize: '18px',
+        fontFamily: 'century-gothic',
+        fontWeight: 500,
+      }}>
+        Menu
+      </Box>
+
+      <Box sx={{
         overflow: 'auto',
         overflowX: 'hidden'
       }}>
@@ -98,11 +96,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
           {menuItems.map((item) => (
             <Button
               key={item.text}
-              onClick={() => { }}
+              onClick={() => setSelectedItem(item.path)}
               sx={{
-                minWidth: 'auto',
-                width: '100%',
-                justifyContent: isExpanded ? 'flex-start' : 'center',
+                width: '80%',
+                ml: isExpanded ? '24px' : '12px',
+                justifyContent: isExpanded? 'flex-start' : 'center',
+                pl: isExpanded ? '12px' : 0,
+                backgroundColor: selectedItem === item.path ? '#800020' : 'transparent',
+                borderRadius: '8px',
+                '&:hover': {
+                  backgroundColor: selectedItem === item.path ? '#80002030' : 'rgba(232, 219, 197, 0.08)',
+                }
               }}
             >
               <div style={{
@@ -112,11 +116,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
                 justifyContent: isExpanded ? 'flex-start' : 'center',
                 width: '100%',
               }}>
-                <div style={{ marginRight: isExpanded ? '12px' : '0' }}>
+                <div style={{
+                  marginRight: isExpanded ? '12px' : '0',
+                  color: '#e8dbc5cc'
+                }}>
                   {item.icon}
                 </div>
                 {isExpanded && (
-                  <div>
+                  <div style={{
+                    color: '#e8dbc5cc'
+                  }}>
                     {item.text}
                   </div>
                 )}
@@ -126,42 +135,42 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
         </List>
       </Box>
 
-      <Box sx={{ 
-        mt: 'auto',
-        borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+      <Box sx={{
+        borderTop: '1px solid #3f3f46',
+        display: 'flex',
+        p: '16px',
+        color: '#e8dbc5cc',
+        fontSize: '16px',
+        fontFamily: 'century-gothic',
+        fontWeight: 500,
+        alignItems: 'space-between',
+        marginTop: 'auto',
       }}>
-        <Button
-          onClick={() => { /* Add logout logic */ }}
+        {isExpanded && <Avatar
           sx={{
-            minWidth: 'auto',
-            width: '100%',
-            justifyContent: isExpanded ? 'flex-start' : 'center',
-            color: '#2d2d2d',
-            textTransform: 'none',
-            '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.04)'
-            }
+            width: 48,
+            height: 48,
+            backgroundColor: '#800020',
+            color: '#e8dbc5cc',
           }}
         >
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '8px 16px',
-            justifyContent: isExpanded ? 'flex-start' : 'center',
-            width: '100%',
-          }}>
-            <div style={{ marginRight: isExpanded ? '12px' : '0' }}>
-              <LogoutIcon sx={{ fontSize: 24 }} />
-            </div>
-            {isExpanded && (
-              <div style={{ 
-                fontSize: '16px',
-                color: '#2d2d2d'
-              }}>
-                Logout
-              </div>
-            )}
-          </div>
+          <PersonIcon sx={{ fontSize: 24 }} />
+        </Avatar>}
+
+        {isExpanded && <Box sx={{
+          pl: '16px',
+          pt: '4px'
+        }}>
+          Tyrion Lannister
+        </Box>}
+
+        <Button
+          onClick={() => { }}
+          sx={{
+            color: '#d4af37',
+          }}
+        >
+          <LogoutIcon sx={{ ml: !isExpanded ? '-8px' : 0, fontSize: 24 }} />
         </Button>
       </Box>
     </Drawer>

@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -189,7 +187,7 @@ export default function HomePage() {
     },
   ];
 
-  const drawerWidth = 240;
+  const drawerWidth = 260;
 
   const handleAddRecord = () => {
     const id = randomInt(0, 1000);
@@ -214,42 +212,63 @@ export default function HomePage() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '100%',
+      }}>
       <Sidebar drawerWidth={drawerWidth} />
 
       <Box
-        component="main"
         sx={{
-          flexGrow: 1,
-          p: 3,
-          width: `calc(100% - ${drawerWidth}px)`,
-          ml: `${drawerWidth}px`
+          width: '100%',
         }}
       >
-        <TopBar 
+
+        <TopBar
+          drawerWidth={drawerWidth}
           onAddClick={handleAddRecord}
           onSearch={(searchTerm) => {
             console.log('Searching for:', searchTerm);
           }}
         />
 
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          editMode="row"
-          rowModesModel={rowModesModel}
-          onRowModesModelChange={handleRowModesModelChange}
-          onRowEditStop={handleRowEditStop}
-          processRowUpdate={processRowUpdate}
-          slotProps={{
-            toolbar: {
-              setRows: safeSetRows,
-              setRowModesModel,
-            },
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            width: `100% - ${drawerWidth}px)`,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            margin: '0 auto',
+            marginLeft: `${drawerWidth / 2}px`,
+            maxWidth: `calc(1200px)`,
+            px: 4,
+            pt: 8
           }}
-        />
-        
+        >
+
+
+
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            editMode="row"
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
+            slotProps={{
+              toolbar: {
+                setRows: safeSetRows,
+                setRowModesModel,
+              },
+            }}
+          />
+        </Box>
       </Box>
+
     </Box>
   );
 }

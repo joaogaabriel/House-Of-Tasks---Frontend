@@ -6,34 +6,35 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
 interface TopBarProps {
+  drawerWidth: number;
   onAddClick: () => void;
   onSearch?: (searchTerm: string) => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ onAddClick, onSearch }) => {
+export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearch }) => {
   return (
     <Box
       sx={{
+        // width: '100%',
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
-        borderRadius: '8px',
         padding: '16px',
         pt: '24px',
         marginBottom: '24px',
         justifyContent: 'space-between',
         gap: '16px',
+        backgroundColor: '#1d1e20',
+        '& .MuiTopbar-paper': {
+          // width: currentWidth,
+        },
       }}
     >
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.05)',
-          borderRadius: '4px',
           padding: '8px 12px',
           flex: 1,
-          maxWidth: '400px',
         }}
       >
         <SearchIcon sx={{ color: '#2d2d2d', marginRight: 1 }} />
@@ -49,10 +50,10 @@ export const TopBar: React.FC<TopBarProps> = ({ onAddClick, onSearch }) => {
           }}
         />
       </Box>
-      
-      <Button 
-        color="secondary" 
-        startIcon={<AddIcon />} 
+
+      <Button
+        color="secondary"
+        startIcon={<AddIcon />}
         onClick={onAddClick}
         sx={{
           backgroundColor: 'rgba(0, 0, 0, 0.05)',
