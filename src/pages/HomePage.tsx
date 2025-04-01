@@ -12,22 +12,20 @@ import {
   GridRowModes,
   DataGrid,
   GridColDef,
-  GridToolbarContainer,
   GridActionsCellItem,
   GridEventListener,
   GridRowId,
   GridRowModel,
   GridRowEditStopReasons,
-  GridSlotProps,
   GridValidRowModel,
 } from "@mui/x-data-grid";
 import {
   randomInt,
-  renderEditStatus,
-  renderStatus,
 } from "@mui/x-data-grid-generator";
 import { TaskService } from "../services/tasks/TaskService";
 import { Task } from "../types/task";
+import { Sidebar } from "../components/Sidebar";
+import { TopBar } from '../components/Topbar';
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -36,40 +34,6 @@ declare module "@mui/x-data-grid" {
       newModel: (oldModel: GridRowModesModel) => GridRowModesModel
     ) => void;
   }
-}
-
-function EditToolbar(props: GridSlotProps["toolbar"]) {
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = async () => {
-    const id = randomInt(0, 1000);
-    setRows((oldRows) => [
-      ...oldRows,
-      {
-        id,
-        title: "",
-        description: "",
-        status: "",
-        userId: "1",
-        categoryId: "",
-        tags: "",
-        comment: "",
-        isNew: true,
-      },
-    ]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: "title" },
-    }));
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  );
 }
 
 export default function HomePage() {
@@ -225,30 +189,67 @@ export default function HomePage() {
     },
   ];
 
+  const drawerWidth = 240;
+
+  const handleAddRecord = () => {
+    const id = randomInt(0, 1000);
+    safeSetRows((oldRows) => [
+      ...oldRows,
+      {
+        id,
+        title: "",
+        description: "",
+        status: "",
+        userId: "1",
+        categoryId: "",
+        tags: "",
+        comment: "",
+        isNew: true,
+      },
+    ]);
+    setRowModesModel((oldModel) => ({
+      ...oldModel,
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: "title" },
+    }));
+  };
+
   return (
-    <Box
-      sx={{
-        width: "100%",
-        "& .actions": { color: "text.secondary" },
-        "& .textPrimary": { color: "text.primary" },
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        slots={{ toolbar: EditToolbar }}
-        slotProps={{
-          toolbar: {
-            setRows: safeSetRows,
-            setRowModesModel,
-          },
+    <Box sx={{ display: 'flex' }}>
+      <Sidebar drawerWidth={drawerWidth} />
+
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`
         }}
-      />
+      >
+        <TopBar 
+          onAddClick={handleAddRecord}
+          onSearch={(searchTerm) => {
+            console.log('Searching for:', searchTerm);
+          }}
+        />
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          editMode="row"
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          slotProps={{
+            toolbar: {
+              setRows: safeSetRows,
+              setRowModesModel,
+            },
+          }}
+        />
+        
+      </Box>
     </Box>
   );
 }

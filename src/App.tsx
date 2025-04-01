@@ -13,7 +13,7 @@ function App() {
           },
         }}
       />
-      <AppRouter></AppRouter>;
+      <AppRouter></AppRouter>
     </AppThemeProvider>
   );
 }
