@@ -15,18 +15,15 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
   return (
     <Box
       sx={{
-        // width: '100%',
         display: 'flex',
         alignItems: 'center',
         padding: '16px',
         pt: '24px',
-        marginBottom: '24px',
+        pl: '24px',
+        mb: '24px',
         justifyContent: 'space-between',
         gap: '16px',
         backgroundColor: '#1d1e20',
-        '& .MuiTopbar-paper': {
-          // width: currentWidth,
-        },
       }}
     >
       <Box
@@ -34,10 +31,12 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
           display: 'flex',
           alignItems: 'center',
           padding: '8px 12px',
+          backgroundColor: '#3f3f46',
           flex: 1,
+          borderRadius: '32px'
         }}
       >
-        <SearchIcon sx={{ color: '#2d2d2d', marginRight: 1 }} />
+        <SearchIcon sx={{ color: '#e8dbc5cc', marginRight: 1 }} />
         <InputBase
           placeholder="Search tasks..."
           onChange={(e) => onSearch?.(e.target.value)}
@@ -45,20 +44,21 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
             color: '#2d2d2d',
             flex: 1,
             '& input::placeholder': {
-              color: 'rgba(0, 0, 0, 0.5)',
+              color: '#e8dbc5cc',
             },
           }}
         />
       </Box>
 
       <Button
-        color="secondary"
         startIcon={<AddIcon />}
         onClick={onAddClick}
         sx={{
-          backgroundColor: 'rgba(0, 0, 0, 0.05)',
+          color: '#e8dbc5cc',
+          backgroundColor: '#800020',
+          p: 1,
           '&:hover': {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'rgba(232, 219, 197, 0.08)',
           }
         }}
       >
