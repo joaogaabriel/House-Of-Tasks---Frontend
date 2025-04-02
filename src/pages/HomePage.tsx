@@ -212,63 +212,46 @@ export default function HomePage() {
   };
 
   return (
+
     <Box
       sx={{
-        display: 'flex',
         width: '100%',
-      }}>
-      <Sidebar drawerWidth={drawerWidth} />
-
+      }}
+    >
       <Box
+        component="main"
         sx={{
-          width: '100%',
+          flexGrow: 1,
+          width: `100% - ${drawerWidth}px)`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          margin: '0 auto',
+          marginLeft: `${drawerWidth / 2}px`,
+          maxWidth: `calc(1200px)`,
+          px: 4,
+          pt: 8
         }}
       >
 
-        <TopBar
-          drawerWidth={drawerWidth}
-          onAddClick={handleAddRecord}
-          onSearch={(searchTerm) => {
-            console.log('Searching for:', searchTerm);
+
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          editMode="row"
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          slotProps={{
+            toolbar: {
+              setRows: safeSetRows,
+              setRowModesModel,
+            },
           }}
         />
-
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            width: `100% - ${drawerWidth}px)`,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            margin: '0 auto',
-            marginLeft: `${drawerWidth / 2}px`,
-            maxWidth: `calc(1200px)`,
-            px: 4,
-            pt: 8
-          }}
-        >
-
-
-
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            editMode="row"
-            rowModesModel={rowModesModel}
-            onRowModesModelChange={handleRowModesModelChange}
-            onRowEditStop={handleRowEditStop}
-            processRowUpdate={processRowUpdate}
-            slotProps={{
-              toolbar: {
-                setRows: safeSetRows,
-                setRowModesModel,
-              },
-            }}
-          />
-        </Box>
       </Box>
-
     </Box>
   );
 }

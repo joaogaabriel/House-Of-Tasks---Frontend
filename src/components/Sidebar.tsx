@@ -20,7 +20,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Tasks', icon: <TaskIcon />, path: '/tasks' },
+    { text: 'Ricardo', icon: <TaskIcon />, path: '/tasks' },
     // { text: 'Categories', icon: <CategoryIcon />, path: '/categories' },
   ];
 
