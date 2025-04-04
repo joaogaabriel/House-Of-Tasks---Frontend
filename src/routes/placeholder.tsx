@@ -17,17 +17,25 @@ export default function Placeholder() {
       <Box
         sx={{
           width: '100%',
+          height: '100%',
+          backgroundColor: '#111213',
         }}
       >
         <TopBar
           drawerWidth={drawerWidth}
-          onAddClick={() => {}}
+          onAddClick={() => { }}
           onSearch={(searchTerm) => {
             console.log('Searching for:', searchTerm);
           }}
         />
 
-        <AppRouter></AppRouter>
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#111213'
+        }}></Box>
+
+        {/* <AppRouter></AppRouter> */}
       </Box>
     </Box>);
 }

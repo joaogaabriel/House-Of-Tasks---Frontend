@@ -20,7 +20,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Ricardo', icon: <TaskIcon />, path: '/tasks' },
+    { text: 'Tasks', icon: <TaskIcon />, path: '/tasks' },
     // { text: 'Categories', icon: <CategoryIcon />, path: '/categories' },
   ];
 
@@ -29,10 +29,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
       variant="permanent"
       sx={{
         width: currentWidth,
-        flexShrink: 0,
+        height: '100vh',
         border: '1px solid #3f3f46',
         '& .MuiDrawer-paper': {
-          width: currentWidth,
+          width: currentWidth + 1,
+          height: '100vh',
+          position: 'fixed',
         },
       }}
     >
@@ -100,7 +102,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
               sx={{
                 width: '80%',
                 ml: isExpanded ? '24px' : '12px',
-                justifyContent: isExpanded? 'flex-start' : 'center',
+                justifyContent: isExpanded ? 'flex-start' : 'center',
                 pl: isExpanded ? '12px' : 0,
                 backgroundColor: selectedItem === item.path ? '#800020' : 'transparent',
                 borderRadius: '8px',

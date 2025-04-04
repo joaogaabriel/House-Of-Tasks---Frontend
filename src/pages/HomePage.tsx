@@ -212,10 +212,11 @@ export default function HomePage() {
   };
 
   return (
-
     <Box
       sx={{
         width: '100%',
+        height: '100%',
+        backgroundColor: '#111213',
       }}
     >
       <Box
@@ -226,16 +227,8 @@ export default function HomePage() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          margin: '0 auto',
-          marginLeft: `${drawerWidth / 2}px`,
-          maxWidth: `calc(1200px)`,
-          px: 4,
-          pt: 8
         }}
       >
-
-
-
         <DataGrid
           rows={rows}
           columns={columns}
