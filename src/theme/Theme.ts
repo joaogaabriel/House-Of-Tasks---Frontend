@@ -54,18 +54,21 @@ const themeOptions: ThemeOptions = {
 
     MuiDataGrid: {
       styleOverrides: {
+        root: {
+          backgroundColor: '#2d2d2d',
+          border: '1px solid #3f3f46',
+          color: '#e8dbc5cc',
+        },
         columnHeader: {
-          backgroundColor: "#590000",
+          backgroundColor: '#800020',
+          color: '#e8dbc5cc',
+          borderBottom: '1px solid #3f3f46',
         },
-        "&:last-of-type": {
-          "& .MuiDataGrid-columnSeparator": {
-            display: "none",
-          },
+        cell: {
+          borderBottom: '1px solid #3f3f46',
         },
-      },
-      columnSeparator: {
-        "&:last-of-type": {
-          display: "none",
+        columnSeparator: {
+          color: '#3f3f46',
         },
       },
     },

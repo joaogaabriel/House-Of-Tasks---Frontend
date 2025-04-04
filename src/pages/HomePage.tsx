@@ -215,7 +215,6 @@ export default function HomePage() {
     <Box
       sx={{
         width: '100%',
-        height: '100%',
         backgroundColor: '#111213',
       }}
     >
@@ -227,6 +226,7 @@ export default function HomePage() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          pt: '70px'
         }}
       >
         <DataGrid

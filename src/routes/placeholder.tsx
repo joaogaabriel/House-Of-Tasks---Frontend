@@ -33,9 +33,9 @@ export default function Placeholder() {
           width: '100%',
           height: '100%',
           backgroundColor: '#111213'
-        }}></Box>
-
-        {/* <AppRouter></AppRouter> */}
+        }}>
+          <AppRouter></AppRouter>
+        </Box>
       </Box>
     </Box>);
 }
