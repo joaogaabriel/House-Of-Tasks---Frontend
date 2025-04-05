@@ -6,24 +6,44 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 400, margin: "0 auto", mt: 5 }}>
-      <Typography variant="h4" mb={2} textAlign="center" color="primary">
-        House Of Task
-      </Typography>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#121212",
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 400,
+          padding: 4,
+          borderRadius: 2,
+          boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)",
+          backgroundColor: "#1e1e2f",
+        }}
+      >
+        <Typography variant="h4" mb={2} textAlign="center" color="secondary">
+          House Of Task
+        </Typography>
 
-      <LoginForm />
+        <LoginForm />
 
-      <Stack direction="row" justifyContent="center" mt={2}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          fullWidth
-          onClick={() => navigate("/register")}
-        >
-          Registre-se
-        </Button>
-      </Stack>
+        <Stack direction="row" justifyContent="center" mt={2}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={() => navigate("/register")}
+          >
+            Registre-se
+          </Button>
+        </Stack>
+      </Box>
     </Box>
   );
 }

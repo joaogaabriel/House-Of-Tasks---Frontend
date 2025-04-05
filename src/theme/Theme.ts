@@ -23,6 +23,9 @@ const themeOptions: ThemeOptions = {
       contrastText: "#353036",
     },
   },
+  typography: {
+    fontFamily: '"Roboto", sans-serif',
+  },
 
   components: {
     MuiDataGrid: {
