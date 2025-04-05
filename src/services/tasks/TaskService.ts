@@ -1,7 +1,7 @@
 import { Task } from "../../types/task";
 import { Api } from "../axios-config";
 
-const getAllByUserId = async (id: string): Promise<any | Error> => {
+const getAllByUserId = async (id: string): Promise<Task | Error> => {
   try {
     const { data } = await Api.get(`/tasks/user/${id}?take=100`);
 
@@ -24,7 +24,7 @@ const getAllByUserId = async (id: string): Promise<any | Error> => {
   }
 };
 
-const getOneById = async (id: string): Promise<any | Error> => {
+const getOneById = async (id: string): Promise<Task | Error> => {
   try {
     const { data } = await Api.get(`/tasks/${id}`);
 
@@ -46,7 +46,7 @@ const getOneById = async (id: string): Promise<any | Error> => {
   }
 };
 
-const create = async (json: any): Promise<Task> => {
+const create = async (json: Task): Promise<Task> => {
   try {
     const { data } = await Api.post("/tasks", json);
 
@@ -66,7 +66,7 @@ const create = async (json: any): Promise<Task> => {
   }
 };
 
-const update = async (id: string, json: any): Promise<any | Error> => {
+const update = async (id: string, json: Task): Promise<Task | Error> => {
   try {
     const { data } = await Api.put(`/tasks/${id}`, json);
 
@@ -86,7 +86,7 @@ const update = async (id: string, json: any): Promise<any | Error> => {
   }
 };
 
-const remove = async (id: number | string): Promise<any | Error> => {
+const remove = async (id: number | string): Promise<Task | Error> => {
   try {
     const { data } = await Api.delete(`/tasks/${id}`);
 
