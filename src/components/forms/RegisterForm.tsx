@@ -1,15 +1,23 @@
 import { Button, TextField, Stack } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthService } from "../../services/auth/AuthService";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica para registrar
-    console.log("Cadastro:", name, email, password);
+
+    const result = await AuthService.create(name, email, password);
+    if (!(result instanceof Error)) {
+      navigate("/");
+    } else {
+      alert(result.message);
+    }
   };
 
   return (

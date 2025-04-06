@@ -28,6 +28,7 @@ import {
 } from "@mui/x-data-grid-generator";
 import { TaskService } from "../services/tasks/TaskService";
 import { Task } from "../types/task";
+import { AuthService } from "../services/auth/AuthService";
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -66,7 +67,7 @@ function EditToolbar(props: GridSlotProps["toolbar"]) {
   return (
     <GridToolbarContainer>
       <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add Task
       </Button>
     </GridToolbarContainer>
   );
@@ -78,13 +79,32 @@ export default function HomePage() {
     {}
   );
 
-  const getRows = async () => {
-    const result = await TaskService.getAllByUserId("1");
-    setRows(result.data);
-  };
-
   React.useEffect(() => {
-    getRows();
+    const fetchTasks = async () => {
+      const storedUser = localStorage.getItem("user");
+
+      if (!storedUser) {
+        console.warn("Usuário não está no localStorage ainda.");
+        return;
+      }
+
+      try {
+        const { email } = JSON.parse(storedUser);
+        console.log("Email do usuário:", email);
+
+        const user = await AuthService.getByEmail(email);
+        console.log("Usuário encontrado:", user);
+
+        const result = await TaskService.getAllByUserId(user.id);
+        console.log("Tarefas encontradas:", result.data);
+
+        setRows(result.data);
+      } catch (err) {
+        console.error("Erro ao buscar tarefas:", err);
+      }
+    };
+
+    fetchTasks();
   }, []);
 
   const handleRowEditStop: GridEventListener<"rowEditStop"> = (

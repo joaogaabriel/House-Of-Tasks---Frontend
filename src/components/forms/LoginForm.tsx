@@ -12,8 +12,9 @@ export default function LoginForm() {
     e.preventDefault();
 
     const result = await AuthService.auth(email, password);
+
     if (!(result instanceof Error)) {
-      navigate("/");
+      navigate("/home");
     } else {
       alert(result.message);
     }

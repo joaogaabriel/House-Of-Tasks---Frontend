@@ -19,7 +19,7 @@ export default function RegisterPage() {
           maxWidth: 400,
           padding: 2,
           borderRadius: 3,
-          boxShadow: "0 0 20px rgba(255, 165, 0, 0.3)", // sombra alaranjada
+          boxShadow: "0 0 20px rgba(255, 165, 0, 0.3)",
           backgroundColor: "#1e1e2f",
         }}
       >

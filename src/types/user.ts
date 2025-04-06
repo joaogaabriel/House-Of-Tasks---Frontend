@@ -1,7 +1,9 @@
-export interface ILogin {
-  token: string;
-  user: {
-    name: string;
-    email: string;
-  };
-}
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  tasks: string | null;
+  tags: string | null;
+  Category: string | null;
+};
