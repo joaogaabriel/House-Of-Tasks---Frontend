@@ -7,3 +7,9 @@ export type User = {
   tags: string | null;
   Category: string | null;
 };
+
+export type LoginUser = {
+  id: string;
+  name: string;
+  email: string;
+};

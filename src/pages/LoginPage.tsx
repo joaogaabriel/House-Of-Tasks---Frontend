@@ -1,9 +1,17 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
+import { useEffect } from "react";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuthContext();
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
+  }, []);
 
   return (
     <Box

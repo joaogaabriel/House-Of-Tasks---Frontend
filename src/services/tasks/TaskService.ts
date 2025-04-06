@@ -5,8 +5,8 @@ const getAllByUserId = async (id: string): Promise<Task[]> => {
   try {
     const { data } = await Api.get(`/tasks/user/${id}?take=100`);
 
-    if (data && data.items) {
-      return data.items as Task[];
+    if (data && data.data) {
+      return data.data as Task[];
     }
 
     return [];

@@ -1,5 +1,6 @@
 import { GlobalStyles } from "@mui/material";
 import { AppThemeProvider } from "./contexts/ThemeContext";
+import { UserProvider } from "./contexts/UserConext";
 import AppRouter from "./routes/routes";
 
 function App() {
@@ -13,7 +14,9 @@ function App() {
           },
         }}
       />
-      <AppRouter></AppRouter>;
+      <UserProvider>
+        <AppRouter></AppRouter>
+      </UserProvider>
     </AppThemeProvider>
   );
 }

@@ -21,14 +21,13 @@ import {
   GridSlotProps,
   GridValidRowModel,
 } from "@mui/x-data-grid";
-import {
-  randomInt,
-  renderEditStatus,
-  renderStatus,
-} from "@mui/x-data-grid-generator";
+import { randomInt } from "@mui/x-data-grid-generator";
 import { TaskService } from "../services/tasks/TaskService";
 import { Task } from "../types/task";
-import { AuthService } from "../services/auth/AuthService";
+import { useUserContext } from "../contexts/UserConext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -74,39 +73,32 @@ function EditToolbar(props: GridSlotProps["toolbar"]) {
 }
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
+  const { user } = useUserContext();
+  const { isAuthenticated } = useAuthContext();
+
   const [rows, setRows] = React.useState<Task[]>([]);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {}
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
+  }, []);
+
+  useEffect(() => {
     const fetchTasks = async () => {
-      const storedUser = localStorage.getItem("user");
-
-      if (!storedUser || storedUser === "undefined") {
-        console.warn("Usuário não está no localStorage ou está mal definido.");
-        return;
-      }
-
-      let parsedUser;
       try {
-        parsedUser = JSON.parse(storedUser);
-      } catch (e) {
-        console.error("Erro ao fazer parse do usuário:", e);
-        return;
-      }
+        if (user) {
+          const result = await TaskService.getAllByUserId(user.id);
+          console.log(result);
 
-      try {
-        const { email } = parsedUser;
-
-        const user = await AuthService.getByEmail(email);
-
-        const result = await TaskService.getAllByUserId(user.id);
-
-        if (Array.isArray(result)) {
-          setRows(result);
-        } else {
-          throw result;
+          if (Array.isArray(result)) {
+            setRows(result);
+          } else {
+            throw result;
+          }
         }
       } catch (err) {
         console.error("Erro ao buscar tarefas:", err);

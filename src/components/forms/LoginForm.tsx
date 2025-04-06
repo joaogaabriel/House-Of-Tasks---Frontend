@@ -1,23 +1,17 @@
 import { Button, TextField, Stack } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthService } from "../../services/auth/AuthService";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+
+  const { login } = useAuthContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await AuthService.auth(email, password);
-
-    if (!(result instanceof Error)) {
-      navigate("/home");
-    } else {
-      alert(result.message);
-    }
+    const result = await login(email, password);
   };
 
   return (

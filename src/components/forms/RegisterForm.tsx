@@ -13,8 +13,9 @@ export default function RegisterForm() {
     e.preventDefault();
 
     const result = await AuthService.create(name, email, password);
+    console.log(result);
     if (!(result instanceof Error)) {
-      navigate("/");
+      navigate("/login");
     } else {
       alert(result.message);
     }
