@@ -1,48 +1,32 @@
 import { Task } from "../../types/task";
 import { Api } from "../axios-config";
 
-const getAllByUserId = async (id: string): Promise<Task | Error> => {
+const getAllByUserId = async (id: string): Promise<Task[]> => {
   try {
     const { data } = await Api.get(`/tasks/user/${id}?take=100`);
 
-    if (data) {
-      return data;
+    if (data && data.items) {
+      return data.items as Task[];
     }
-    console.log("data", data);
 
-    return new Error(
-      "Nenhum dado foi retornado ao tentar recuperar todos as tasks pelo id do usuário."
-    );
+    return [];
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      const message = error.response.data.message;
-      const status = error.response.data.status;
-      return new Error(`Error ${status}: ${message}`);
-    } else {
-      return new Error(`An unexpected error occurred: ${error.message}`);
-    }
+    console.error("Erro ao buscar tasks:", error);
+    return [];
   }
 };
 
-const getOneById = async (id: string): Promise<Task | Error> => {
+const getOneById = async (id: string): Promise<Task> => {
   try {
     const { data } = await Api.get(`/tasks/${id}`);
 
     if (data) {
-      return data;
+      return data as Task;
     }
 
-    return new Error(
-      "Nenhum dado foi retornado ao tentar recuperar uma task pelo id."
-    );
+    throw new Error("Nenhum dado foi retornado ao tentar recuperar uma task.");
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      const message = error.response.data.message;
-      const status = error.response.data.status;
-      return new Error(`Error ${status}: ${message}`);
-    } else {
-      return new Error(`An unexpected error occurred: ${error.message}`);
-    }
+    throw formatApiError(error, "recuperar uma task pelo ID");
   }
 };
 
@@ -56,53 +40,40 @@ const create = async (json: Task): Promise<Task> => {
 
     throw new Error("Nenhum dado foi retornado ao tentar criar uma task.");
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      const message = error.response.data.message;
-      const status = error.response.data.status;
-      throw new Error(`Error ${status}: ${message}`);
-    } else {
-      throw new Error(`An unexpected error occurred: ${error.message}`);
-    }
+    throw formatApiError(error, "criar uma task");
   }
 };
 
-const update = async (id: string, json: Task): Promise<Task | Error> => {
+const update = async (id: string, json: Task): Promise<Task> => {
   try {
     const { data } = await Api.put(`/tasks/${id}`, json);
 
     if (data) {
-      return data;
+      return data as Task;
     }
 
-    return new Error("Nenhum dado foi retornado ao tentar atualizar uma task.");
+    throw new Error("Nenhum dado foi retornado ao tentar atualizar uma task.");
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      const message = error.response.data.message;
-      const status = error.response.data.status;
-      return new Error(`Error ${status}: ${message}`);
-    } else {
-      return new Error(`An unexpected error occurred: ${error.message}`);
-    }
+    throw formatApiError(error, "atualizar uma task");
   }
 };
 
-const remove = async (id: number | string): Promise<Task | Error> => {
+const remove = async (id: number | string): Promise<void> => {
   try {
-    const { data } = await Api.delete(`/tasks/${id}`);
-
-    if (data) {
-      return data;
-    }
-
-    return new Error("Nenhum dado foi retornado ao tentar deletar uma  task.");
+    await Api.delete(`/tasks/${id}`);
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      const message = error.response.data.message;
-      const status = error.response.data.status;
-      return new Error(`Error ${status}: ${message}`);
-    } else {
-      return new Error(`An unexpected error occurred: ${error.message}`);
-    }
+    throw formatApiError(error, "deletar uma task");
+  }
+};
+
+// Função auxiliar para lidar com erros da API
+const formatApiError = (error: any, context: string): Error => {
+  if (error.response && error.response.data) {
+    const message = error.response.data.message;
+    const status = error.response.data.status;
+    return new Error(`Erro ${status} ao ${context}: ${message}`);
+  } else {
+    return new Error(`Erro inesperado ao ${context}: ${error.message}`);
   }
 };
 

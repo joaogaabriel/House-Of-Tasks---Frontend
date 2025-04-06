@@ -83,22 +83,31 @@ export default function HomePage() {
     const fetchTasks = async () => {
       const storedUser = localStorage.getItem("user");
 
-      if (!storedUser) {
-        console.warn("Usuário não está no localStorage ainda.");
+      if (!storedUser || storedUser === "undefined") {
+        console.warn("Usuário não está no localStorage ou está mal definido.");
+        return;
+      }
+
+      let parsedUser;
+      try {
+        parsedUser = JSON.parse(storedUser);
+      } catch (e) {
+        console.error("Erro ao fazer parse do usuário:", e);
         return;
       }
 
       try {
-        const { email } = JSON.parse(storedUser);
-        console.log("Email do usuário:", email);
+        const { email } = parsedUser;
 
         const user = await AuthService.getByEmail(email);
-        console.log("Usuário encontrado:", user);
 
         const result = await TaskService.getAllByUserId(user.id);
-        console.log("Tarefas encontradas:", result.data);
 
-        setRows(result.data);
+        if (Array.isArray(result)) {
+          setRows(result);
+        } else {
+          throw result;
+        }
       } catch (err) {
         console.error("Erro ao buscar tarefas:", err);
       }
