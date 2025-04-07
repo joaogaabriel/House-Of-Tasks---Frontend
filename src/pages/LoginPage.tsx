@@ -43,7 +43,7 @@ export default function LoginPage() {
           justifySelf: 'center',
           pb: '24px'
         }}>
-          Login
+          Log In
         </Box>
 
         <LoginForm />

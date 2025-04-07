@@ -29,7 +29,7 @@ export default function LoginForm() {
             padding: '8px 12px',
             backgroundColor: '#3f3f46',
             flex: 1,
-            borderRadius: '32px',
+            borderRadius: '8px',
           }}
         >
           <MailIcon sx={{ color: '#e8dbc5cc', marginRight: 1 }} />
@@ -56,7 +56,7 @@ export default function LoginForm() {
             padding: '8px 12px',
             backgroundColor: '#3f3f46',
             flex: 1,
-            borderRadius: '32px',
+            borderRadius: '8px',
           }}
         >
           <LockIcon sx={{ color: '#e8dbc5cc', marginRight: 1 }} />

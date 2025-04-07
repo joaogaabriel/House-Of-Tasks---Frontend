@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
         if (storedUserSession) {
           changeUser(JSON.parse(storedUserSession));
-          navigate("/home", { replace: true });
+          navigate("/tasks", { replace: true });
         }
       } else {
         navigate("/login", { replace: true });
@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
       }
     }
 
-    if (isAuthenticated) navigate("/home", { replace: true });
+    if (isAuthenticated) navigate("/tasks", { replace: true });
   }, [isAuthenticated, navigate]);
 
   const handleLogin = async (
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
     setAccessToken(result.token);
 
-    navigate("/home", { replace: true });
+    navigate("/tasks", { replace: true });
     return true;
   };
 

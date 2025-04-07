@@ -10,7 +10,7 @@ const themeOptions: ThemeOptions = {
       paper: "#3A3A3A",
     },
     text: {
-      primary: "#ffffff",
+      primary: "#e8dbc5cc",
       disabled: "#E7E7E7",
     },
     primary: {
@@ -25,9 +25,6 @@ const themeOptions: ThemeOptions = {
       light: "#EEAE25",
       contrastText: "#353036",
     },
-  },
-  typography: {
-    fontFamily: '"Roboto", sans-serif',
   },
 
   components: {

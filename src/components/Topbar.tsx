@@ -33,7 +33,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
           padding: '8px 12px',
           backgroundColor: '#3f3f46',
           flex: 1,
-          borderRadius: '32px'
+          borderRadius: '8px',
         }}
       >
         <SearchIcon sx={{ color: '#e8dbc5cc', marginRight: 1 }} />

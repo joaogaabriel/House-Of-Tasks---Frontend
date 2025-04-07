@@ -6,10 +6,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Avatar, IconButton } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserConext';
-import { useAuthContext } from '../contexts/AuthContext';
+import { useUserContext } from '../contexts/UserConext'; 
 
 interface SidebarProps {
   drawerWidth: number;
@@ -21,21 +19,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const menuItems = [
     // TO-DO: implement another items
-    { text: 'Home', icon: <HomeIcon />, path: '/home' },
+    { text: 'Tasks', icon: <HomeIcon />, path: '/tasks' },
+    { text: 'Categories', icon: <HomeIcon />, path: '/categories' },
   ];
 
   const navigate = useNavigate();
 
   const currentPath = location.href.replace('http://localhost:4200', '');
   const { user } = useUserContext();
-
-  const { logout } = useAuthContext();
-
-  const handleLogout = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await logout();
-    navigate('/login', {replace: true})
-  };
 
   return (
     <Drawer
@@ -159,13 +150,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
         fontFamily: 'century-gothic',
         fontWeight: 500,
         alignItems: 'center',
-        justifyContent: 'space-between',
         marginTop: 'auto',
       }}>
         {isExpanded && (
           <Button
             onClick={() => navigate("/profile", { replace: true })}
-            sx={{ display: 'flex', alignItems: 'center' }} // Ensures Avatar is centered within the button
+            sx={{ display: 'flex', alignItems: 'center' }}
           >
             <Avatar
               sx={{
@@ -185,17 +175,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
             {user?.name ?? 'Tyrion Lannister'}
           </Box>
         )}
-
-        <Button
-          onClick={handleLogout}
-          sx={{
-            color: '#d4af37',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <LogoutIcon sx={{ ml: !isExpanded ? '-8px' : 0, fontSize: 24 }} />
-        </Button>
       </Box>
     </Drawer >
   );

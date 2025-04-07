@@ -1,10 +1,11 @@
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import AuthPage from "../pages/AuthPage";
 import ProfilePage from "../pages/ProfilePage";
+import TasksPage from "../pages/TasksPage";
+import CategoriesPage from "../pages/CategoriesPage";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage />,
       },
-      { path: "/home", element: <HomePage /> },
+      { path: "/tasks", element: <TasksPage /> },
+      { path: "/categories", element: <CategoriesPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/profile", element: <ProfilePage /> },
     ],
