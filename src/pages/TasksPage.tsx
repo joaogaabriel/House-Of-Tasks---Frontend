@@ -183,24 +183,22 @@ export default function TasksPage() {
   };
 
   let columns: GridColDef[] = [
-    { field: "id", width: 50, editable: true },
-    { field: "title", display: "flex", flex: 1, editable: true },
-    { field: "description", display: "flex", flex: 1, editable: true },
+    { headerName: "Título", field: "title", display: "flex", flex: 2, editable: true },
+    { headerName: "Descrição", field: "description", display: "flex", flex: 5, editable: true },
     {
+      headerName: "Status", 
       field: "status",
       type: "singleSelect",
       valueOptions: ["PENDING", "IN_PROGRESS", "COMPLETED"],
-      width: 100,
+      display: "flex", 
+      flex: 1,
       editable: true,
     },
-    { field: "userId", width: 100, editable: true },
-    { field: "categoryId", width: 100, editable: true },
-    { field: "tags", width: 200, editable: true },
-    { field: "comment", display: "flex", flex: 1, editable: true },
+    { headerName: "Categoria", field: "categoryId", display: "flex", flex: 1, editable: true },
     {
+      headerName: "Ações",
       field: "actions",
       type: "actions",
-      headerName: "Actions",
       width: 100,
       cellClassName: "actions",
       getActions: ({ id }) => {

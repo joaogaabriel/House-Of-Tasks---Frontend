@@ -61,6 +61,7 @@ const themeOptions: ThemeOptions = {
         },
         columnHeader: {
           backgroundColor: '#800020',
+          fontSize: '18px',
           color: '#e8dbc5cc',
           borderBottom: '1px solid #3f3f46',
         },

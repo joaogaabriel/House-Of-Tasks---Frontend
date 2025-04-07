@@ -19,8 +19,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const menuItems = [
     // TO-DO: implement another items
-    { text: 'Tasks', icon: <HomeIcon />, path: '/tasks' },
-    { text: 'Categories', icon: <HomeIcon />, path: '/categories' },
+    { text: 'Tarefas', icon: <HomeIcon />, path: '/tasks' },
+    { text: 'Categorias', icon: <HomeIcon />, path: '/categories' },
   ];
 
   const navigate = useNavigate();
