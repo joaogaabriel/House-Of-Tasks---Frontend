@@ -73,6 +73,12 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
     changeUser(result.user);
 
+    
+    console.log('   DEBUG     ')
+
+    console.log(result)
+    console.log(result.user)
+
     sessionStorage.setItem(KEY_ACCESS_TOKE, JSON.stringify(result.token));
     sessionStorage.setItem(KEY_EXPIRE_DATE, JSON.stringify(expireDate));
     sessionStorage.setItem(KEY_CURRENT_USER, JSON.stringify(result.user));

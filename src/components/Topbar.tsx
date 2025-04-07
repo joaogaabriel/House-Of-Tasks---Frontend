@@ -62,7 +62,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
           }
         }}
       >
-        Add record
+        Add Task
       </Button>
     </Box>
   );
