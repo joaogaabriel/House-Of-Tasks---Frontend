@@ -28,6 +28,8 @@ import { useUserContext } from "../contexts/UserConext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { TopBar } from "../components/Topbar";
+import { Sidebar } from "../components/Sidebar";
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -64,11 +66,7 @@ function EditToolbar(props: GridSlotProps["toolbar"]) {
   };
 
   return (
-    <GridToolbarContainer>
-      <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add Task
-      </Button>
-    </GridToolbarContainer>
+    <GridToolbarContainer></GridToolbarContainer>
   );
 }
 
@@ -246,30 +244,65 @@ export default function HomePage() {
     },
   ];
 
+  const drawerWidth = 260;
+
   return (
     <Box
       sx={{
-        width: "100%",
-        "& .actions": { color: "text.secondary" },
-        "& .textPrimary": { color: "text.primary" },
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        slots={{ toolbar: EditToolbar }}
-        slotProps={{
-          toolbar: {
-            setRows: safeSetRows,
-            setRowModesModel,
-          },
+        display: 'flex',
+        width: '100%',
+      }}>
+      <Sidebar drawerWidth={drawerWidth} />
+
+      <Box
+        sx={{
+          width: '100%',
+          backgroundColor: '#111213'
         }}
-      />
+      >
+        <TopBar
+          drawerWidth={drawerWidth}
+          onAddClick={() => { }}
+          onSearch={(searchTerm) => {
+            console.log('Searching for:', searchTerm);
+          }}
+        />
+
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#111213',
+          display: 'flex',
+          justifyContent: 'center',
+          pt: '48px'
+        }}>
+          <Box
+            sx={{
+              width: "80%",
+              height: '80%',
+              "& .actions": { color: "text.secondary" },
+              "& .textPrimary": { color: "text.primary" },
+            }}
+          >
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              editMode="row"
+              rowModesModel={rowModesModel}
+              onRowModesModelChange={handleRowModesModelChange}
+              onRowEditStop={handleRowEditStop}
+              processRowUpdate={processRowUpdate}
+              slots={{ toolbar: EditToolbar }}
+              slotProps={{
+                toolbar: {
+                  setRows: safeSetRows,
+                  setRowModesModel,
+                },
+              }}
+            />
+          </Box>
+        </Box>
+      </Box>
     </Box>
   );
 }

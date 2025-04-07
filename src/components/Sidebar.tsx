@@ -19,9 +19,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
   const currentWidth = isExpanded ? drawerWidth : 80;
 
   const menuItems = [
+    // TO-DO: implement another items
     { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Tasks', icon: <TaskIcon />, path: '/tasks' },
-    // { text: 'Categories', icon: <CategoryIcon />, path: '/categories' },
   ];
 
   return (
