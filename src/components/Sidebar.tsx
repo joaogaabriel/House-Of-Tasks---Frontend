@@ -9,6 +9,7 @@ import { Button, Avatar, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserConext';
+import { useAuthContext } from '../contexts/AuthContext';
 
 interface SidebarProps {
   drawerWidth: number;
@@ -27,6 +28,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const currentPath = location.href.replace('http://localhost:4200', '');
   const { user } = useUserContext();
+
+  const { logout } = useAuthContext();
+
+  const handleLogout = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = await logout();
+
+    navigate('/login', {replace: true})
+  };
 
   return (
     <Drawer
@@ -149,8 +160,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
         fontSize: '16px',
         fontFamily: 'century-gothic',
         fontWeight: 500,
-        alignItems: 'center', // Fix vertical alignment
-        justifyContent: 'space-between', // Optional: space out the logout button from the profile
+        alignItems: 'center',
+        justifyContent: 'space-between',
         marginTop: 'auto',
       }}>
         {isExpanded && (
@@ -178,7 +189,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
         )}
 
         <Button
-          onClick={() => { }}
+          onClick={handleLogout}
           sx={{
             color: '#d4af37',
             display: 'flex',
