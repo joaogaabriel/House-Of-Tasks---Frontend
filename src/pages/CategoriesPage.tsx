@@ -87,7 +87,7 @@ export default function CategoriesPage() {
     const fetchCategories = async () => {
       try {
         if (user) {
-          const result = await CategoryService.getAllByUserId(user.id);
+          const result = await CategoryService.getAll();
           console.log(result);
 
           if (Array.isArray(result)) {
@@ -183,8 +183,8 @@ export default function CategoriesPage() {
   };
 
   let columns: GridColDef[] = [
-    { field: "Nome", display: "flex", flex: 1, editable: true },
-    { field: "Descrição", display: "flex", flex: 1, editable: true },
+    { headerName: "Nome", field: "name", display: "flex", flex: 2, editable: true },
+    { headerName: "Descrição", field: "description", display: "flex", flex: 4, editable: true },
     {
       field: "Ações",
       type: "actions",
