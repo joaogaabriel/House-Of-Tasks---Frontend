@@ -1,7 +1,7 @@
 import { GlobalStyles } from "@mui/material";
 import { AppThemeProvider } from "./contexts/ThemeContext";
 import { UserProvider } from "./contexts/UserConext";
-import AppRouter from "./routes/routes";
+import Placeholder from "./routes/placeholder";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         }}
       />
       <UserProvider>
-        <AppRouter></AppRouter>
+        <Placeholder></Placeholder>
       </UserProvider>
     </AppThemeProvider>
   );

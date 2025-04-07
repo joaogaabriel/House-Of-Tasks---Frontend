@@ -1,9 +1,12 @@
 import { createTheme, ThemeOptions } from "@mui/material";
 
 const themeOptions: ThemeOptions = {
+  typography: {
+    fontFamily: 'century-gothic'
+  },
   palette: {
     background: {
-      default: "#0d0d0d",
+      default: "#111213",
       paper: "#3A3A3A",
     },
     text: {
@@ -28,20 +31,47 @@ const themeOptions: ThemeOptions = {
   },
 
   components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          width: 240,
+          boxSizing: 'border-box',
+          backgroundColor: '#1d1e20',
+          color: '#2f3237',
+          transition: 'width 0.2s',
+          display: 'flex',
+          flexDirection: 'column',
+          fontFamily: 'Roboto, sans-serif',
+          overflowX: 'hidden',
+        }
+      }
+    },
+
+    MuiTopbar: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#1d1e20',
+        }
+      }
+    },
+
     MuiDataGrid: {
       styleOverrides: {
+        root: {
+          backgroundColor: '#2d2d2d',
+          border: '1px solid #3f3f46',
+          color: '#e8dbc5cc',
+        },
         columnHeader: {
-          backgroundColor: "#590000",
+          backgroundColor: '#800020',
+          color: '#e8dbc5cc',
+          borderBottom: '1px solid #3f3f46',
         },
-        "&:last-of-type": {
-          "& .MuiDataGrid-columnSeparator": {
-            display: "none",
-          },
+        cell: {
+          borderBottom: '1px solid #3f3f46',
         },
-      },
-      columnSeparator: {
-        "&:last-of-type": {
-          display: "none",
+        columnSeparator: {
+          color: '#3f3f46',
         },
       },
     },

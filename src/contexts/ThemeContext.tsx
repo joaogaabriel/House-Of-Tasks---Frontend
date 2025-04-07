@@ -15,7 +15,6 @@ export const AppThemeProvider: React.FC<IThemeProviderProps> = ({
         sx={{
           display: "flex",
           backgroundColor: Theme.palette.background.default,
-          padding: "20px",
           height: `calc(100vh - 40px)`,
         }}
       >
