@@ -33,9 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
 
   const handleLogout = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const result = await logout();
-
+    await logout();
     navigate('/login', {replace: true})
   };
 
