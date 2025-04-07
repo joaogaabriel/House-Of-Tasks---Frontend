@@ -1,54 +1,36 @@
-# React + TypeScript + Vite
+# HOUSE OF TASKS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**"When you play the game of tasks, you complete or you procrastinate."**
 
-Currently, two official plugins are available:
+HOUSE OF TASKS is a powerful task management application where each user can forge their own reign of productivity. Organize your tasks, categorize your missions, and conquer your daily goals with wisdom worthy of a Citadel master.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🏰 **Kingdom Entities**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **User**: Each inhabitant of the kingdom, responsible for their own tasks and organization.
+- **Task**: Missions that must be accomplished to keep the domain under control.
+- **Tag**: Special marks to categorize and quickly identify each task.
+- **Category**: Large domains under which tasks can be organized.
+- **comment**: The whispers and counsel shared , offering insight, updates, or reflections on a mission progress.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
+## **HOW TO RUN APPLICATION**
+1. First, ensure that you have Docker Desktop installed.
+2. Run Docker before doing anything, it is essential that Docker is composed.
+3. Run the docker command `docker-compose up -d`, other commands should not work as well.
+4. Now, download the backend from the following link (https://github.com/joaogaabriel/House-Of-Tasks)
+5. With docker running, open the backend folder and `run nmp run start`
+6. Wait for gulp to compile and run the backend successfully.
+7. Now, download the frontend from the following link (https://github.com/joaogaabriel/House-Of-Tasks---Frontend)
+8. With the backend running, open the frontend folder and `run nmp run dev`
+9. Wait for vite to compile and run the frontend successfully.
+10. By the end of this you should be able to use both backend and frontend.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Backend is running on http://localhost:3000.  
+Frontend is running on http://localhost:4200.
+---
+**🔥"Winter is coming, but your deadlines are closer. Get organized before it's too late!"🔥**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
