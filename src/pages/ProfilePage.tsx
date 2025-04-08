@@ -4,9 +4,12 @@ import {
   GridRowModesModel
 } from "@mui/x-data-grid";
 import { Sidebar } from "../components/Sidebar";
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useUserContext } from "../contexts/UserConext";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -21,6 +24,14 @@ export default function ProfilePage() {
   const drawerWidth = 260;
 
   const { user } = useUserContext();
+  const { logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await logout();
+    navigate('/login', {replace: true})
+  };
 
   return (
     <Box
@@ -78,7 +89,7 @@ export default function ProfilePage() {
             fontWeight: 500,
             mb: '16px'
           }}>
-            { user?.name ?? 'Tyrion Lannister'}
+            {user?.name ?? 'Tyrion Lannister'}
           </Box>
 
           <Box sx={{
@@ -99,12 +110,26 @@ export default function ProfilePage() {
             fontWeight: 500,
             mb: '16px'
           }}>
-            { user?.email ?? 'tyrion.lannister@ccc.ufcg.edu.br' }
+            {user?.email ?? 'tyrion.lannister@ccc.ufcg.edu.br'}
           </Box>
+
+          <Button
+            startIcon={<LogoutIcon />}
+            onClick={handleLogout}
+            sx={{
+              mt: '96px',
+              color: '#e8dbc5cc',
+              backgroundColor: '#800020',
+              px: '16px',
+              '&:hover': {
+                backgroundColor: 'rgba(232, 219, 197, 0.08)',
+              }
+            }}
+          >
+            Log Out
+          </Button>
         </Box>
       </Box>
-
-
     </Box>
   );
 }

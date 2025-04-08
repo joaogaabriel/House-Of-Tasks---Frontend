@@ -22,7 +22,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
         pl: '24px', 
         justifyContent: 'space-between',
         gap: '16px',
-        backgroundColor: '#1d1e20',
+        backgroundColor: '#1e1e2f',
         borderBottom: '1px solid #3f3f46',
       }}
     >
@@ -33,7 +33,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
           padding: '8px 12px',
           backgroundColor: '#3f3f46',
           flex: 1,
-          borderRadius: '32px'
+          borderRadius: '8px',
         }}
       >
         <SearchIcon sx={{ color: '#e8dbc5cc', marginRight: 1 }} />
@@ -62,7 +62,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
           }
         }}
       >
-        Add Task
+        Adicionar Tarefa
       </Button>
     </Box>
   );

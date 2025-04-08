@@ -18,7 +18,7 @@ export default function RegisterPage() {
           width: "100%",
           maxWidth: 400,
           padding: 2,
-          borderRadius: 3,
+          borderRadius: '8px',
           boxShadow: "0 0 20px rgba(255, 165, 0, 0.3)",
           backgroundColor: "#1e1e2f",
         }}

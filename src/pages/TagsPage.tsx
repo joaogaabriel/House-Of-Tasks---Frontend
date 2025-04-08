@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -22,14 +20,14 @@ import {
   GridValidRowModel,
 } from "@mui/x-data-grid";
 import { randomInt } from "@mui/x-data-grid-generator";
-import { TaskService } from "../services/tasks/TaskService";
-import { Task } from "../types/task";
 import { useUserContext } from "../contexts/UserConext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { TopBar } from "../components/Topbar";
 import { Sidebar } from "../components/Sidebar";
+import { Tag } from "../types/tag";
+import { TagService } from "../services/tasks/TagService";
 
 declare module "@mui/x-data-grid" {
   interface ToolbarPropsOverrides {
@@ -53,7 +51,7 @@ function EditToolbar(props: GridSlotProps["toolbar"]) {
         description: "",
         status: "",
         userId: "1",
-        categoryId: "",
+        tagId: "",
         tags: "",
         comment: "",
         isNew: true,
@@ -70,13 +68,13 @@ function EditToolbar(props: GridSlotProps["toolbar"]) {
   );
 }
 
-export default function HomePage() {
+export default function TagsPage() {
   const navigate = useNavigate();
 
   const { user } = useUserContext();
   const { isAuthenticated } = useAuthContext();
 
-  const [rows, setRows] = React.useState<Task[]>([]);
+  const [rows, setRows] = React.useState<Tag[]>([]);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {}
   );
@@ -86,10 +84,10 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchTags = async () => {
       try {
         if (user) {
-          const result = await TaskService.getAllByUserId(user.id);
+          const result = await TagService.getAll();
           console.log(result);
 
           if (Array.isArray(result)) {
@@ -103,7 +101,7 @@ export default function HomePage() {
       }
     };
 
-    fetchTasks();
+    fetchTags();
   }, []);
 
   const handleRowEditStop: GridEventListener<"rowEditStop"> = (
@@ -125,7 +123,7 @@ export default function HomePage() {
 
   const handleDeleteClick = (id: GridRowId) => async () => {
     try {
-      await TaskService.remove(id);
+      await TagService.remove(id);
       setRows(rows.filter((row) => row.id !== id));
     } catch (error) {
       console.error("Erro ao deletar tarefa:", error);
@@ -146,9 +144,9 @@ export default function HomePage() {
 
   const processRowUpdate = async (newRow: GridRowModel) => {
     try {
-      let updatedRow: Task;
+      let updatedRow: Tag;
       if (newRow.isNew) {
-        const data = await TaskService.create(newRow);
+        const data = await TagService.create(newRow);
 
         updatedRow = { ...data, isNew: false };
 
@@ -157,7 +155,7 @@ export default function HomePage() {
           updatedRow,
         ]);
       } else {
-        const data = await TaskService.update(newRow.id, newRow);
+        const data = await TagService.update(newRow.id, newRow);
         updatedRow = data;
 
         setRows((prevRows) =>
@@ -181,28 +179,15 @@ export default function HomePage() {
       oldRows: readonly GridValidRowModel[]
     ) => readonly GridValidRowModel[]
   ) => {
-    setRows((old) => updater(old) as Task[]);
+    setRows((old) => updater(old) as Tag[]);
   };
 
   let columns: GridColDef[] = [
-    { field: "id", width: 50, editable: true },
-    { field: "title", display: "flex", flex: 1, editable: true },
-    { field: "description", display: "flex", flex: 1, editable: true },
+    { headerName: "Nome", field: "name", display: "flex", flex: 2, editable: true },
     {
-      field: "status",
-      type: "singleSelect",
-      valueOptions: ["PENDING", "IN_PROGRESS", "COMPLETED"],
-      width: 100,
-      editable: true,
-    },
-    { field: "userId", width: 100, editable: true },
-    { field: "categoryId", width: 100, editable: true },
-    { field: "tags", width: 200, editable: true },
-    { field: "comment", display: "flex", flex: 1, editable: true },
-    {
-      field: "actions",
+      field: "Ações",
       type: "actions",
-      headerName: "Actions",
+      headerName: "Ações",
       width: 100,
       cellClassName: "actions",
       getActions: ({ id }) => {

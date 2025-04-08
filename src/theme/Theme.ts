@@ -10,7 +10,7 @@ const themeOptions: ThemeOptions = {
       paper: "#3A3A3A",
     },
     text: {
-      primary: "#ffffff",
+      primary: "#e8dbc5cc",
       disabled: "#E7E7E7",
     },
     primary: {
@@ -26,9 +26,6 @@ const themeOptions: ThemeOptions = {
       contrastText: "#353036",
     },
   },
-  typography: {
-    fontFamily: '"Roboto", sans-serif',
-  },
 
   components: {
     MuiDrawer: {
@@ -36,7 +33,7 @@ const themeOptions: ThemeOptions = {
         paper: {
           width: 240,
           boxSizing: 'border-box',
-          backgroundColor: '#1d1e20',
+          backgroundColor: '#1e1e2f',
           color: '#2f3237',
           transition: 'width 0.2s',
           display: 'flex',
@@ -50,7 +47,7 @@ const themeOptions: ThemeOptions = {
     MuiTopbar: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#1d1e20',
+          backgroundColor: '#1e1e2f',
         }
       }
     },
@@ -58,12 +55,13 @@ const themeOptions: ThemeOptions = {
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          backgroundColor: '#2d2d2d',
+          backgroundColor: '#1e1e2f',
           border: '1px solid #3f3f46',
           color: '#e8dbc5cc',
         },
         columnHeader: {
           backgroundColor: '#800020',
+          fontSize: '18px',
           color: '#e8dbc5cc',
           borderBottom: '1px solid #3f3f46',
         },

@@ -1,8 +1,9 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
 import { useEffect } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
+import RegisterIcon from '@mui/icons-material/Edit';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function LoginPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#121212",
+        backgroundColor: "#111213",
       }}
     >
       <Box
@@ -29,8 +30,7 @@ export default function LoginPage() {
           width: "100%",
           maxWidth: 400,
           padding: 4,
-          borderRadius: 2,
-          boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)",
+          border: '1px solid #3f3f46',
           backgroundColor: "#1e1e2f"
         }}
       >
@@ -43,23 +43,30 @@ export default function LoginPage() {
           justifySelf: 'center',
           pb: '24px'
         }}>
-        House of Tasks
+          Log In
+        </Box>
+
+        <LoginForm />
+
+        <Stack direction="row" justifyContent="center" mt={2}>
+          <Button
+            startIcon={<RegisterIcon />}
+            variant="contained"
+            fullWidth
+            onClick={() => navigate("/register")}
+            sx={{
+              color: '#e8dbc5cc',
+              backgroundColor: '#800020',
+              p: 1,
+              '&:hover': {
+                backgroundColor: 'rgba(232, 219, 197, 0.08)',
+              }
+            }}
+          >
+            Registrar-se
+          </Button>
+        </Stack>
       </Box>
-
-      <LoginForm />
-
-      <Stack direction="row" justifyContent="center" mt={2}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          fullWidth
-          onClick={() => navigate("/register")}
-        >
-          Registre-se
-        </Button>
-      </Stack>
-    </Box>
     </Box >
   );
 }
