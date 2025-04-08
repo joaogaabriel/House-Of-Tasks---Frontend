@@ -22,7 +22,7 @@ export const TopBar: React.FC<TopBarProps> = ({ drawerWidth, onAddClick, onSearc
         pl: '24px', 
         justifyContent: 'space-between',
         gap: '16px',
-        backgroundColor: '#1d1e20',
+        backgroundColor: '#1e1e2f',
         borderBottom: '1px solid #3f3f46',
       }}
     >

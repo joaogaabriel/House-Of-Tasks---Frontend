@@ -31,7 +31,7 @@ export default function LoginPage() {
           maxWidth: 400,
           padding: 4,
           border: '1px solid #3f3f46',
-          backgroundColor: "#1d1e20"
+          backgroundColor: "#1e1e2f"
         }}
       >
         <Box sx={{
