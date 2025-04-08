@@ -6,6 +6,7 @@ import AuthPage from "../pages/AuthPage";
 import ProfilePage from "../pages/ProfilePage";
 import TasksPage from "../pages/TasksPage";
 import CategoriesPage from "../pages/CategoriesPage";
+import TagsPage from "../pages/TagsPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       },
       { path: "/tasks", element: <TasksPage /> },
       { path: "/categories", element: <CategoriesPage /> },
+      { path: "/tags", element: <TagsPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/profile", element: <ProfilePage /> },
     ],

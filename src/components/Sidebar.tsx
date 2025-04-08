@@ -5,6 +5,8 @@ import List from '@mui/material/List';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
+import CategoryIcon from '@mui/icons-material/Category';
+import TagIcon from '@mui/icons-material/Tag';
 import { Button, Avatar, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../contexts/UserConext'; 
@@ -20,7 +22,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ drawerWidth }) => {
   const menuItems = [
     // TO-DO: implement another items
     { text: 'Tarefas', icon: <HomeIcon />, path: '/tasks' },
-    { text: 'Categorias', icon: <HomeIcon />, path: '/categories' },
+    { text: 'Categorias', icon: <CategoryIcon />, path: '/categories' },
+    { text: 'Tags', icon: <TagIcon />, path: '/tags' },
   ];
 
   const navigate = useNavigate();
